@@ -4,7 +4,7 @@ Citizen.CreateThread(function()
     for _, elevator in pairs(elevators) do
         for _, floor in pairs(elevator.floors) do
             exports.ox_target:addBoxZone({
-                coords = floor.coords,
+                coords = floor.coordstarget,
                 size = vec3(1, 1, 2),
                 rotation = 0.0,
                 debug = false,
@@ -12,13 +12,13 @@ Citizen.CreateThread(function()
                     {
                         name = elevator.name,
                         icon = "fas fa-elevator",
-                        label = "Usar Ascensor",
+                        label = "Use elevator",
                         onSelect = function()
                             local playerCoords = GetEntityCoords(PlayerPedId())
                             local currentFloor = "Desconocida"
 
                             for _, f in pairs(elevator.floors) do
-                                if #(playerCoords - f.coords) < 1.5 then
+                                if #(playerCoords - f.coordstarget) < 1.5 then
                                     currentFloor = f.planta
                                     break
                                 end
@@ -40,6 +40,7 @@ Citizen.CreateThread(function()
 end)
 
 RegisterNUICallback('selectFloor', function(data, cb)
+    local player = PlayerPedId()
     local elevatorName = data.elevator
     local selectedFloorLabel = data.floor
 
@@ -47,7 +48,8 @@ RegisterNUICallback('selectFloor', function(data, cb)
         if elevator.name == elevatorName then
             for _, floor in pairs(elevator.floors) do
                 if floor.label == selectedFloorLabel then
-                    SetEntityCoords(PlayerPedId(), floor.coords)
+                    SetEntityCoords(player, floor.coords.x, floor.coords.y, floor.coords.z)
+                    SetEntityHeading(player, floor.coords.w)
                     break
                 end
             end
