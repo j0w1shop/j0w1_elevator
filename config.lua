@@ -4,11 +4,10 @@ Config = {}
 
 Config.Elevators = {
     {
-        name = "Ascensor Central", -- Nombre del ascensor
+        name = "Auto Exotic", -- Nombre del ascensor
         floors = {
-            {label = "", planta = "1", coords = vector3(205.0, -915.0, 30.0)},
-            {label = " ", planta = "2", coords = vector3(207.0, -918.0, 30.0)},
-            {label = "  ", planta = "3", coords = vector3(210.0, -915.0, 40.0)}
+            {label = "Main Floor", planta = "1", coordstarget = vector3(565.782, -237.818, 50.213), coords = vector4(565.422, -238.459, 48.981, 161.890)},
+            {label = "Pictures Room", planta = "2", coordstarget = vector3(565.439, -185.717, 50.541), coords = vector4(565.297, -186.631, 49.306, 181.173)},
         }
     },
     -- Puedes añadir más ascensores y plantas aquí
